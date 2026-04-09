@@ -63,13 +63,14 @@ void processFrame(cv::Mat& frame, std::vector<Object>& output, ocsort::OCSort& t
     }
 
     if (!data.empty()) {
-        //更新卡尔曼滤波器
+        // 更新卡尔曼滤波器
         std::vector<Eigen::RowVectorXf> res = tracker.update(Vector2Matrix(data));
-        //绘制矩形框
+        // 绘制矩形框
         for (auto& j : res) {
             int ID = int(j[4]);
             int class_id = int(j[5]);
-            
+            float conf = j[6];   // 置信度，范围通常为 [0,1]
+
             // 确保class_id在COLORS数组范围内（0-9）
             int color_index = class_id;
             if (color_index < 0) color_index = 0;
@@ -88,7 +89,10 @@ void processFrame(cv::Mat& frame, std::vector<Object>& output, ocsort::OCSort& t
             if (name_index >= static_cast<int>(CLASS_NAMES.size())) {
                 name_index = 0; // 使用第一个类别作为默认
             }
-            std::string labelText = CLASS_NAMES[name_index] + cv::format(" ID:%d", ID ,j[6]);
+            // 添加置信度显示（保留两位小数）
+            std::string labelText = CLASS_NAMES[name_index] + cv::format(" ID:%d conf:%.2f", ID, conf);
+            // 若希望显示百分比，可改为：cv::format(" ID:%d conf:%.0f%%", ID, conf * 100)
+
             cv::putText(frame, labelText, cv::Point(j[0], j[1] - 5),
                         cv::FONT_HERSHEY_SIMPLEX, 0.5, color, 1, cv::LINE_AA);
         }

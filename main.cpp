@@ -274,7 +274,7 @@ int main(int argc, char** argv) {
                 videoWriter.write(frame);
             }
 
-            cv::imshow("YOLOv11 + OCSORT", frame);
+            // cv::imshow("YOLOv11 + OCSORT", frame);
             processedFrames++;
             
             // 计算显示帧率

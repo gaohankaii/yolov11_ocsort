@@ -39,7 +39,7 @@ endif()
 
 # ------------------ TensorRT 设置 ------------------
 # AutoDL环境中的TensorRT路径
-set(TENSORRT_ROOT /root/CUDA/TensorRT-8.6.1.6)
+set(TENSORRT_ROOT /root/TensorRT-8.6.1.6)
 
 if(EXISTS ${TENSORRT_ROOT})
     message(STATUS "TensorRT found at: ${TENSORRT_ROOT}")

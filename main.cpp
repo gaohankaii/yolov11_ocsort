@@ -88,7 +88,7 @@ void processFrame(cv::Mat& frame, std::vector<Object>& output, ocsort::OCSort& t
             if (name_index >= static_cast<int>(CLASS_NAMES.size())) {
                 name_index = 0; // 使用第一个类别作为默认
             }
-            std::string labelText = CLASS_NAMES[name_index] + cv::format(" ID:%d", ID);
+            std::string labelText = CLASS_NAMES[name_index] + cv::format(" ID:%d", ID ,j[6]);
             cv::putText(frame, labelText, cv::Point(j[0], j[1] - 5),
                         cv::FONT_HERSHEY_SIMPLEX, 0.5, color, 1, cv::LINE_AA);
         }

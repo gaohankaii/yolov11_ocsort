@@ -5,18 +5,18 @@ namespace ocsort {
     KalmanBoxTracker::KalmanBoxTracker(Eigen::VectorXf bbox_, int cls_, int delta_t_) {
         bbox = std::move(bbox_);
         delta_t = delta_t_;
-        kf = new KalmanFilterNew(7, 4);
+        kf = new KalmanFilterNew(7, 4); //RQ赋值
         kf->F << 1, 0, 0, 0, 1, 0, 0,
-            0, 1, 0, 0, 0, 1, 0,
-            0, 0, 1, 0, 0, 0, 1,
-            0, 0, 0, 1, 0, 0, 0,
-            0, 0, 0, 0, 1, 0, 0,
-            0, 0, 0, 0, 0, 1, 0,
-            0, 0, 0, 0, 0, 0, 1;
+                 0, 1, 0, 0, 0, 1, 0,
+                 0, 0, 1, 0, 0, 0, 1,
+                 0, 0, 0, 1, 0, 0, 0,
+                 0, 0, 0, 0, 1, 0, 0,
+                 0, 0, 0, 0, 0, 1, 0,
+                 0, 0, 0, 0, 0, 0, 1;
         kf->H << 1, 0, 0, 0, 0, 0, 0,
             0, 1, 0, 0, 0, 0, 0, 0,
             0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0;
-        kf->R.block(2, 2, 2, 2) *= 10.0;
+        kf->R.block(2, 2, 2, 2) *= 10.0;//RQ调整
         kf->P.block(4, 4, 3, 3) *= 1000.0;
         kf->P *= 10.0;
         kf->Q.bottomRightCorner(1, 1)(0, 0) *= 0.01;

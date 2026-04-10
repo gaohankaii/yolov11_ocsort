@@ -206,7 +206,8 @@ int main(int argc, char** argv) {
 
     // initiate VideoWriter
     cv::VideoWriter videoWriter;
-    std::string outputPath = videofile.insert(0,"out_");
+    std::string outputPath = videofile;
+    outputPath.insert(0,"out_");
 
     // cuda
     cudaSetDevice(0);

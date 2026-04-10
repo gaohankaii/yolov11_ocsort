@@ -206,8 +206,12 @@ int main(int argc, char** argv) {
 
     // initiate VideoWriter
     cv::VideoWriter videoWriter;
-    std::string outputPath = "out_video.mp4";
-    std::cout << videofile << std::endl;
+    std::string outputPath = videofile;
+    if(videofile.length() >= 4){
+        outputPath = outputPath.insert(videofile.length() - 4,_out);
+    }else{
+        std::cerr << "Vedio should be .avi format" << std::endl;
+    }
 
     // cuda
     cudaSetDevice(0);

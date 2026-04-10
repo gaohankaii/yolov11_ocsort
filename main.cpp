@@ -208,7 +208,7 @@ int main(int argc, char** argv) {
     cv::VideoWriter videoWriter;
     std::string outputPath = videofile;
     if(videofile.length() >= 4){
-        outputPath = outputPath.insert(videofile.length() - 4,_out);
+        outputPath = outputPath.insert(videofile.length() - 4, "_out");
     }else{
         std::cerr << "Vedio should be .avi format" << std::endl;
     }

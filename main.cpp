@@ -226,7 +226,7 @@ int main(int argc, char** argv) {
     
     std::cout << "Initializing OCSort tracker..." << std::endl;
     //检测阈值 最大允许丢失帧数 轨迹确认最小连续匹配次数 交并比阈值 时间差阈值 关联函数类型 惯性因子 是否使用bytetrack
-    ocsort::OCSort tracker = ocsort::OCSort(0.3, 250, 1, 0.22136877277096445, 1, "giou", 0.3941737016672115, true);
+    ocsort::OCSort tracker = ocsort::OCSort(0.3, 500, 1, 0.1, 1, "giou", 0.3941737016672115, true);
     std::cout << "OCSort tracker initialized successfully." << std::endl;
 
     if (saveVideo) {
